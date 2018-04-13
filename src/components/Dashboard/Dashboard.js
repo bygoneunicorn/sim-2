@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import House from '../House/House';
 import {Link} from 'react-router-dom';
+import './Dashboard.css';
 
 export default class Dashboard extends Component{
     constructor(){
@@ -31,14 +32,13 @@ export default class Dashboard extends Component{
         const houseList = this.state.houses.map((e) =>{
             return(
                 <div key={e.house_id}>
-                    {console.log(e)}
                     <House id={e.house_id} property_name={e.property_name} address={e.address} city={e.city} state={e.state} zipcode={e.zip} deleteHouse={this.handleDeleteHouse}/>
                 </div>
             )
         })
         return(
-            <div>
-                <h1>Dashboard</h1>
+            <div className="main">
+                <h1 className="dashboard-title">Dashboard</h1>
                 <Link to='/wizard/stepone'><button>Add New Property</button></Link>
                 {houseList}
             </div>

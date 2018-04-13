@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import {updateMonthlyMortgageAmount, updateDesiredMonthlyRent} from '../../ducks/reducer';
 export class StepThree extends Component{
     constructor(){
         super()
@@ -22,6 +22,7 @@ export class StepThree extends Component{
     render(){
         return(
             <div>
+                {console.log(this.props)}
                 <h3>Monthly Mortgage Amount</h3>
                 <input onChange={(e) => this.handleMortgageAmount(e.target.value)}/>
                 <h3>Desired Monthly Rent</h3>
@@ -40,4 +41,4 @@ function mapStateToProps( state ){
        desiredMonthlyRent
     }
 }
-export default connect( mapStateToProps)(StepThree)
+export default connect( mapStateToProps, {updateMonthlyMortgageAmount, updateDesiredMonthlyRent})(StepThree)
