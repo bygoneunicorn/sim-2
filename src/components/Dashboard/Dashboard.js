@@ -10,10 +10,21 @@ export default class Dashboard extends Component{
         this.state = {
             houses: []
         }
+        this.handleDeleteHouse = this.handleDeleteHouse.bind( this )
     }
     componentDidMount(){
         axios.get('http://localhost:4000/api/houses').then(res => {
             this.setState({ houses: res.data })
+        })
+    }
+    anotherFunc(){
+
+    }
+
+    handleDeleteHouse(id){
+        console.log()
+        axios.delete(`http://localhost:4000/api/houses/:${id}`).then(res => {
+            console.log('Successfully deleted house')
         })
     }
     render(){
@@ -21,14 +32,14 @@ export default class Dashboard extends Component{
             return(
                 <div key={e.house_id}>
                     {console.log(e)}
-                    <House property_name={e.property_name} address={e.address} city={e.city} state={e.state} zipcode={e.zip}/>
+                    <House id={e.house_id} property_name={e.property_name} address={e.address} city={e.city} state={e.state} zipcode={e.zip} deleteHouse={this.handleDeleteHouse}/>
                 </div>
             )
         })
         return(
             <div>
                 <h1>Dashboard</h1>
-                <Link to='/wizard'><button>Add New Property</button></Link>
+                <Link to='/wizard/stepone'><button>Add New Property</button></Link>
                 {houseList}
             </div>
         )
